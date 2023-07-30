@@ -1,4 +1,8 @@
-export module crud;
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
 
 namespace some_crud{
     class crud_t{
@@ -53,7 +57,7 @@ namespace some_crud{
     };
 
     //const string _create {"CREATE"};
-        string create_method(crud_t crud){
+/*        string create_method(crud_t crud){
             string args = move(crud.get_args(","));
             string result{""};
             if (!args.empty())
@@ -85,6 +89,6 @@ namespace some_crud{
             };
             return result;
         };
-        const string _update {"UPDATE"};
+*/        const string _update {"UPDATE"};
         const string _delete {"DELETE"};
 };

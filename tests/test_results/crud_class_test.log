@@ -1,0 +1,21 @@
+TEST: crud_test empty construct:
+	test1.row():		*
+	test1.table():		||
+	test1.get_args():	||
+	test1.get_args(","):	||
+	test1.arg("lol").arg("").arg("kek")
+	test1.get_args():	|lol AND kek|
+	test1.get_args(","):	|lol , kek|
+	test1.arg().arg().arg()
+	test1.get_args():	||
+	test1.get_args(","):	||
+	test1.row("SOME_ROW")
+	test1.row():		|SOME_ROW|
+	test1.row("SOME_ROW_REWRITE")
+	test1.row():		|SOME_ROW_REWRITE|
+	test1.row("")
+	test1.row():		|*
+	test1.table("SOME_TABLE"):		|
+	test1.table():		|SOME_TABLE
+	test1.table(""):		|
+	test1.table():		|SOME_TABLE
