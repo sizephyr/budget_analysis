@@ -35,10 +35,10 @@ namespace some_crud{
                 string result;
                 for (auto i:_args)
                     if (!i.empty())
-                        result += result.empty() ? i : (" "+separator+" " + i);
+                        result += result.empty() ? i : (separator + i);
                 return result;
             }
-            string get_args(){return get_args("AND");}//default separator is "AND"
+            string get_args(){return get_args(" AND ");}//default separator is "AND"
 
             void table(string input){//set table name
                 if (!input.empty())
@@ -56,39 +56,60 @@ namespace some_crud{
             }
     };
 
+    class crud_opers{
     //const string _create {"CREATE"};
-/*        string create_method(crud_t crud){
-            string args = move(crud.get_args(","));
-            string result{""};
-            if (!args.empty())
-                result =
-                    "CREATE INTO "
-                    + crud.table()
-                    + " VALUES (DEFAULT, "
-                    + args
-                    + ")";
-            cout << "Args is |" << args << "|"<< endl;
-            return result;
-        };
+        public:
 
-        const string _read {"SELECT"};
-        string read(crud_t crud){
-            string args = crud.get_args();
-            string result{
-                "SELECT "
-                + crud.row()
-                + " FROM "
-                + crud.table()
-                + (
-                    args.empty()
-                    ?
-                    ""
-                    :
-                    (" where" + args)
-                )
+            static string create_method(crud_t crud){
+                string args = move(crud.get_args(", "));
+                string result{""};
+                if (!args.empty())
+                    result =
+                        "CREATE INTO "
+                        + crud.table()
+                        + " VALUES (DEFAULT, "
+                        + args
+                        + ")";
+                //cout << "Args is |" << args << "|"<< endl;
+                return result;
             };
-            return result;
-        };
-*/        const string _update {"UPDATE"};
-        const string _delete {"DELETE"};
+
+            const string _read {"SELECT"};
+            static string read(crud_t crud){
+                string args = crud.get_args();
+                string result{
+                    "SELECT "
+                    + crud.row()
+                    + " FROM "
+                    + crud.table()
+                    + (
+                        args.empty()
+                        ?
+                        ""
+                        :
+                        (" where " + args)
+                    )
+                };
+                return result;
+            };
+            const string _update {"UPDATE"};
+/*            static string update_method(crud_t crud){
+                string args = crud.get_args();
+                string result{
+                    "SELECT "
+                    + crud.row()
+                    + " FROM "
+                    + crud.table()
+                    + (
+                        args.empty()
+                        ?
+                        ""
+                        :
+                        (" where " + args)
+                    )
+                };
+                return result;
+            };
+            const string _delete {"DELETE"};
+*/    };
 };
