@@ -40,16 +40,18 @@ namespace some_crud{
             }
             string get_args(){return get_args(" AND ");}//default separator is "AND"
 
-            void table(string input){//set table name
+            crud_t& table(string input){//set table name
                 if (!input.empty())
                     _table = input;
+                return *this;
             }
             string table(){//get table name
                 return _table.empty()? "" : _table;
             }
 
-            void row(string input){//set row name
+            crud_t& row(string input){//set row name
                 _row = input.empty() ? "*" : input;
+                return *this;
             }
             string row(){//get row name
                 return _row;
@@ -93,23 +95,34 @@ namespace some_crud{
                 return result;
             };
             const string _update {"UPDATE"};
-/*            static string update_method(crud_t crud){
-                string args = crud.get_args();
-                string result{
-                    "SELECT "
-                    + crud.row()
-                    + " FROM "
-                    + crud.table()
-                    + (
-                        args.empty()
-                        ?
-                        ""
-                        :
-                        (" where " + args)
+            static string update_method(crud_t crud){
+                string args = move(crud.get_args());
+                string row = move(crud.row());
+                string table = move(crud.table());
+                string result {""};
+                if (
+                        !table.empty() 
+                        && !row.empty()
+                        && !args.empty()
                     )
-                };
-                return result;
+                    result = 
+                        "UPDATE "
+                        + crud.table()
+                        + " SET "
+                        + crud.row()
+                        + (
+                            args.empty()
+                            ?
+                            ""
+                            :
+                            (" where " + args)
+                        )
+                    ;
+                else
+                    cout << "crud::crud_opers::update_method\n\t"
+                        << "ERR: one or more required parameters are empty!\n";
+                return result.empty() ? "" : result;
             };
             const string _delete {"DELETE"};
-*/    };
+      };
 };
